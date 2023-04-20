@@ -15,7 +15,7 @@ try{
     echo "Error al conectar a la base de datos";
 }
 
-$URL = "http://localhost:8082/sistemadeventas";
+$URL = "http://localhost:8082/Parcial02Pcortes/sistema_de_ventas_pcortes/archivos/";
 
 date_default_timezone_set("America/Bogota");
 $fechaHora = date('Y-m-d H:i:s');

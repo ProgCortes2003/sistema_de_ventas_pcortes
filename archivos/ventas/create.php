@@ -3,6 +3,7 @@ include ('../app/config.php');
 include ('../layout/sesion.php');
 
 include ('../layout/parte1.php');
+include ('../app/controllers/almacen/listado_de_productos.php');
 include ('../app/controllers/ventas/listado_de_ventas.php');
 
 ?>
@@ -44,16 +45,76 @@ include ('../app/controllers/ventas/listado_de_ventas.php');
                                     <i class="fas fa-minus"></i>
                                 </button>
                             </div>
+                            <div class="card-body">
+                                <b>carrito</b>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#modal-buscar_producto">
+                                    <i class="fa fa-search"></i>
+                                    Buscar producto
+                                </button>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm table-hover table-stripped">
+                                    <thead>
+                                    <tr>
+                                        <th style="background-color: #e7e7e7; text-align: center">Nro</th>
+                                        <th style="background-color: #e7e7e7; text-align: center">Producto</th>
+                                        <th style="background-color: #e7e7e7; text-align: center">Detalle</th>
+                                        <th style="background-color: #e7e7e7; text-align: center">Cantidad</th>
+                                        <th style="background-color: #e7e7e7; text-align: center">Precio Unitario</th>
+                                        <th style="background-color: #e7e7e7; text-align: center">Precio SubTotal</th>
+                                        <th style="background-color: #e7e7e7; text-align: center">Acción</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>*</td>
+                                        <td>*</td>
+                                        <td>*</td>
+                                        <td>*</td>
+                                        <td>*</td>
+                                        <td>*</td>
+                                        <td><a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Borrar</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>*</td>
+                                        <td>*</td>
+                                        <td>*</td>
+                                        <td>*</td>
+                                        <td>*</td>
+                                        <td>*</td>
+                                        <td><a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Borrar</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3" style="background-color: #e7e7e7; text-align: right" >Total</th>
+                                        <th>*</th>
+                                        <th>*</th>
+                                        <th>*</th>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card card-outline card-primary">
+                                            <div class="card-header">
+                                                <h3 class="card-title"><i class="fa fa-user-check"></i> Datos del Cliente
+                                                </h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                Hello
+                                            </div>
+                                        </div>
+                                    </div>
 
                         </div>
 
-                        <div class="card-body">
-                            <b>carrito</b>
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#modal-buscar_producto">
-                                <i class="fa fa-search"></i>
-                                Buscar producto
-                            </button>
+
                             <!-- modal para visualizar datos de los proveedor -->
                             <div class="modal fade" id="modal-buscar_producto">
                                 <div class="modal-dialog modal-lg">
@@ -97,48 +158,12 @@ include ('../app/controllers/ventas/listado_de_ventas.php');
                                                                 <script>
                                                                     $('#btn_selecionar<?php echo $id_producto;?>').click(function () {
 
+                                                                       var producto = "<?php echo $productos_dato['nombre'];?>";
+                                                                        $('#producto').val(producto);
 
-                                                                        var id_producto = "<?php echo $productos_dato['id_producto'];?>";
-                                                                        $('#id_producto').val(id_producto);
 
-                                                                        var codigo = "<?php echo $productos_dato['codigo'];?>";
-                                                                        $('#codigo').val(codigo);
 
-                                                                        var categoria = "<?php echo $productos_dato['categoria'];?>";
-                                                                        $('#categoria').val(categoria);
 
-                                                                        var nombre = "<?php echo $productos_dato['nombre'];?>";
-                                                                        $('#nombre_producto').val(nombre);
-
-                                                                        var email = "<?php echo $productos_dato['email'];?>";
-                                                                        $('#usuario_producto').val(email);
-
-                                                                        var descripcion = "<?php echo $productos_dato['descripcion'];?>";
-                                                                        $('#descripcio_producto').val(descripcion);
-
-                                                                        var stock = "<?php echo $productos_dato['stock'];?>";
-                                                                        $('#stock').val(stock);
-                                                                        $('#stock_actual').val(stock);
-
-                                                                        var stock_minimo = "<?php echo $productos_dato['stock_minimo'];?>";
-                                                                        $('#stock_minimo').val(stock_minimo);
-
-                                                                        var stock_maximo = "<?php echo $productos_dato['stock_maximo'];?>";
-                                                                        $('#stock_maximo').val(stock_maximo);
-
-                                                                        var precio_compra = "<?php echo $productos_dato['precio_compra'];?>";
-                                                                        $('#precio_compra').val(precio_compra);
-
-                                                                        var precio_venta = "<?php echo $productos_dato['precio_venta'];?>";
-                                                                        $('#precio_venta').val(precio_venta);
-
-                                                                        var fecha_ingreso = "<?php echo $productos_dato['fecha_ingreso'];?>";
-                                                                        $('#fecha_ingreso').val(fecha_ingreso);
-
-                                                                        var ruta_img = "<?php echo $URL.'/almacen/img_productos/'.$productos_dato['imagen'];?>";
-                                                                        $('#img_producto').attr({src: ruta_img });
-
-                                                                        $('#modal-buscar_producto').modal('toggle');
 
                                                                     });
                                                                 </script>
@@ -162,7 +187,34 @@ include ('../app/controllers/ventas/listado_de_ventas.php');
                                                     </tbody>
                                                     </tfoot>
                                                 </table>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="">Producto</label>
+                                                            <input type="text" id="producto" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="">Detalle</label>
+                                                            <input type="text" id="detalle" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="">Cantidad</label>
+                                                            <input type="text" id="cantidad" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="">Precio Unitario</label>
+                                                            <input type="text" id="precioUnitario" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -172,11 +224,7 @@ include ('../app/controllers/ventas/listado_de_ventas.php');
 
                             <br>
 
-                            Aquí debe ir la tabla
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
 
-                                </table>
                             </div>
 
 
@@ -190,27 +238,7 @@ include ('../app/controllers/ventas/listado_de_ventas.php');
 
             </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card card-outline card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa fa-user-check"></i> Datos del Cliente
-                            </h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
 
-                        </div>
-
-                        <div class="card-body">
-                            Hello
-                        </div>
-
-                    </div>
-
-                </div>
 
                 <div id="respuesta_create"></div>
 
