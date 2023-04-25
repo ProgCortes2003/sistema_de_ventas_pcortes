@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-04-2023 a las 15:00:47
+-- Tiempo de generación: 25-04-2023 a las 14:57:40
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -62,12 +62,19 @@ INSERT INTO `tb_almacen` (`id_producto`, `codigo`, `nombre`, `descripcion`, `sto
 
 CREATE TABLE `tb_carrito` (
   `id_carrito` int(11) NOT NULL,
-  `id_venta` int(11) NOT NULL,
+  `nro_venta` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `fecha_hora_creacion` datetime NOT NULL,
-  `fecha_hora_actualizacion` datetime NOT NULL
+  `fyh_creacion` datetime DEFAULT NULL,
+  `fyh_actualizacion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tb_carrito`
+--
+
+INSERT INTO `tb_carrito` (`id_carrito`, `nro_venta`, `id_producto`, `cantidad`, `fyh_creacion`, `fyh_actualizacion`) VALUES
+(32, 4, 1, 1, '2023-04-25 07:56:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -112,6 +119,14 @@ CREATE TABLE `tb_clientes` (
   `fyh_creacion` datetime NOT NULL,
   `fyh_actualizacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tb_clientes`
+--
+
+INSERT INTO `tb_clientes` (`id_cliente`, `nombre_cliente`, `nit_ci_cliente`, `celular_cliente`, `email_cliente`, `fyh_creacion`, `fyh_actualizacion`) VALUES
+(1, 'Julio Armando Correa', '12345678', '3124567890', 'JULIOARMANDOCORREA@GMAIL.COM', '2023-04-25 13:42:49', '2023-04-25 13:42:49'),
+(2, 'Brayan Andres Melo', '24680124', '3204567801', 'BRAYANANDRESMELO@GMAIL.COM', '2023-04-25 13:42:49', '2023-04-25 13:42:49');
 
 -- --------------------------------------------------------
 
@@ -226,6 +241,7 @@ INSERT INTO `tb_usuarios` (`id_usuario`, `nombres`, `email`, `password_user`, `t
 
 CREATE TABLE `tb_ventas` (
   `id_venta` int(11) NOT NULL,
+  `nro_venta` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `total_pagado` int(11) NOT NULL,
   `fyh_creacion` datetime NOT NULL,
@@ -249,8 +265,8 @@ ALTER TABLE `tb_almacen`
 --
 ALTER TABLE `tb_carrito`
   ADD PRIMARY KEY (`id_carrito`),
-  ADD KEY `id_venta` (`id_venta`),
-  ADD KEY `id_producto` (`id_producto`);
+  ADD KEY `id_producto` (`id_producto`),
+  ADD KEY `nro_venta` (`nro_venta`);
 
 --
 -- Indices de la tabla `tb_categorias`
@@ -297,7 +313,8 @@ ALTER TABLE `tb_usuarios`
 --
 ALTER TABLE `tb_ventas`
   ADD PRIMARY KEY (`id_venta`),
-  ADD KEY `id_cliente` (`id_cliente`);
+  ADD KEY `id_cliente` (`id_cliente`),
+  ADD KEY `nro_venta` (`nro_venta`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -313,7 +330,7 @@ ALTER TABLE `tb_almacen`
 -- AUTO_INCREMENT de la tabla `tb_carrito`
 --
 ALTER TABLE `tb_carrito`
-  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_categorias`
@@ -325,7 +342,7 @@ ALTER TABLE `tb_categorias`
 -- AUTO_INCREMENT de la tabla `tb_clientes`
 --
 ALTER TABLE `tb_clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_compras`
@@ -372,8 +389,7 @@ ALTER TABLE `tb_almacen`
 -- Filtros para la tabla `tb_carrito`
 --
 ALTER TABLE `tb_carrito`
-  ADD CONSTRAINT `tb_carrito_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `tb_almacen` (`id_producto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `tb_carrito_ibfk_2` FOREIGN KEY (`id_venta`) REFERENCES `tb_ventas` (`id_venta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `tb_carrito_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `tb_almacen` (`id_producto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tb_compras`
@@ -393,7 +409,8 @@ ALTER TABLE `tb_usuarios`
 -- Filtros para la tabla `tb_ventas`
 --
 ALTER TABLE `tb_ventas`
-  ADD CONSTRAINT `tb_ventas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `tb_clientes` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `tb_ventas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `tb_clientes` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tb_ventas_ibfk_2` FOREIGN KEY (`nro_venta`) REFERENCES `tb_carrito` (`nro_venta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

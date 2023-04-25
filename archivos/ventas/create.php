@@ -90,11 +90,11 @@ include ('../app/controllers/clientes/listado_de_clientes.php');
                                                             <tr>
                                                                 <td><?php echo $contador_de_ventas = $contador_de_ventas + 1; ?></td>
                                                                 <td>
-                                                                    <button class="btn btn-info" id="btn_selecionar<?php echo $id_producto;?>">
+                                                                    <button class="btn btn-info" id="btn_seleccionar_<?php echo $id_producto;?>">
                                                                         Selecionar
                                                                     </button>
                                                                     <script>
-                                                                        $('#btn_selecionar<?php echo $id_producto;?>').click(function () {
+                                                                        $('#btn_seleccionar_<?php echo $id_producto;?>').click(function () {
 
                                                                             var id_producto = "<?php echo $id_producto?>";
                                                                             $('#id_producto').val(id_producto);
@@ -161,7 +161,7 @@ include ('../app/controllers/clientes/listado_de_clientes.php');
                                                     </div>
                                                     <script>
                                                         $('#btn_registrar_carrito').click(function() {
-
+                                                           console.log("Funciona");
                                                                 var nro_venta = '<?php echo $contador_de_ventas + 1 ;?>';
                                                                 var id_producto = $('#id_producto').val();
                                                                 var cantidad = $('#cantidad').val();
@@ -173,7 +173,7 @@ include ('../app/controllers/clientes/listado_de_clientes.php');
                                                                 }else{
                                                                     var url = "../app/controllers/ventas/registrar_carrito.php";
                                                                     $.get(url,{nro_venta:nro_venta,id_producto:id_producto,cantidad:cantidad}, function(datos){
-                                                                            $.('#respuesta_carrito').html(datos);
+                                                                            $('#respuesta_carrito').html(datos);
                                                                         }
                                                                     );
 
@@ -189,6 +189,7 @@ include ('../app/controllers/clientes/listado_de_clientes.php');
                                     </div>
                                     <!-- /.modal-dialog -->
                                 </div>
+
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-sm table-hover table-stripped">
                                         <thead>
@@ -220,7 +221,7 @@ include ('../app/controllers/clientes/listado_de_clientes.php');
                                             $contador_de_carrito = $contador_de_carrito + 1;
                                             $cantidad_total = $cantidad_total + $carrito_dato['cantidad'];
                                             $precio_unitario_total = $precio_unitario_total + floatval($carrito_dato['precio_venta']);
-                                            $precio_total = 0;
+                                            //$precio_total = 0;
                                             ?>
                                             <tr>
                                                 <td><center><?php echo $contador_de_carrito; ?> </center></td>
@@ -234,7 +235,7 @@ include ('../app/controllers/clientes/listado_de_clientes.php');
                                                         $cantidad = floatval($carrito_dato['cantidad']);
                                                         $precio_venta= floatval($carrito_dato['precio_venta']);
                                                         echo $subtotal = $cantidad * $precio_venta;
-                                                        $precio_total = $precio_total + $subtotal;
+                                                        //$precio_total = $precio_total + $subtotal;
 
                                                         ?>
                                                     </center>
@@ -262,7 +263,7 @@ include ('../app/controllers/clientes/listado_de_clientes.php');
                                                     <?php echo $precio_unitario_total;?>
                                                 </center></th>
                                             <th><center>
-                                                    <?php echo $precio_total; ?>
+                                                    <?php // echo $precio_total; ?>
                                                 </center></th>
                                         </tr>
 
@@ -331,23 +332,17 @@ include ('../app/controllers/clientes/listado_de_clientes.php');
                                                                     Selecionar
                                                                 </button>
                                                             </td>
-                                                                <script>
-                                                                    $('#btn_selecionar<?php echo $id_producto;?>').click(function () {
-
-                                                                        var id_producto = "<?php echo $id_producto?>";
-                                                                        $('#id_producto').val(id_producto);
-                                                                        var producto = "<?php echo $productos_dato['nombre'];?>";
-                                                                        $('#producto').val(producto);
-                                                                        var descripcion = "<?php echo $productos_dato['descripcion'];?>";
-                                                                        $('#detalle').val(descripcion);
-                                                                        var precio_venta = "<?php echo $productos_dato['precio_venta'];?>";
-                                                                        $('#precioUnitario').val(precio_venta);
-                                                                        $('#cantidad').focus();
-
-                                                                    });
-                                                                </script>
                                                             <td>
                                                                 <?php echo $clientes_dato['nombre_cliente'] ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $clientes_dato['nit_ci_cliente'] ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $clientes_dato['celular_cliente'] ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $clientes_dato['email_cliente'] ?>
                                                             </td>
                                                         </tr>
                                                         <?php
@@ -359,55 +354,25 @@ include ('../app/controllers/clientes/listado_de_clientes.php');
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" id="id_producto" hidden>
-                                                            <label for="">Producto</label>
-                                                            <input type="text" id="producto" class="form-control" disabled>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="">Detalle</label>
-                                                            <input type="text" id="detalle" class="form-control" disabled>
-                                                        </div>
+
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="">Cantidad</label>
-                                                            <input type="number" id="cantidad" class="form-control">
-                                                        </div>
+
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="">Precio Unitario</label>
-                                                            <input type="text" id="precioUnitario" class="form-control" disabled>
-                                                        </div>
+
                                                     </div>
                                                 </div>
-                                                <button style="float:right" id="btn_registrar_carrito" class="btn btn-primary">Registrar</button>
+                                                <button style="float:right" id="" class="btn btn-primary">Registrar</button>
                                                 <div id="respuesta_carrito" >
 
                                                 </div>
                                                 <script>
-                                                    $('#btn_registrar_carrito').click(function() {
 
-                                                            var nro_venta = '<?php echo $contador_de_ventas + 1 ;?>';
-                                                            var id_producto = $('#id_producto').val();
-                                                            var cantidad = $('#cantidad').val();
-
-                                                            if(id_producto == ""){
-                                                                alert("Debe de llenar los campos ...");
-                                                            }else if(cantidad == ""){
-                                                                alert("Debe de llenar todos los campos ...");
-                                                            }else{
-                                                                var url = "../app/controllers/ventas/registrar_carrito.php";
-                                                                $.get(url,{nro_venta:nro_venta,id_producto:id_producto,cantidad:cantidad}, function(datos){
-                                                                        $.('#respuesta_carrito').html(datos);
-                                                                    }
-                                                                );
-
-                                                            }
-                                                        }
-                                                    );
                                                 </script>
                                             </div>
 

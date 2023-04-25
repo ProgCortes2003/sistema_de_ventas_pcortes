@@ -22,7 +22,6 @@ if($sentencia->execute()){
     </script>
     <?php
 }else{
-
     session_start();
     $_SESSION['mensaje'] = "Error no se pudo registrar en la base de datos";
     $_SESSION['icono'] = "error";
@@ -33,3 +32,4 @@ if($sentencia->execute()){
     </script>
     <?php
 }
+?>
