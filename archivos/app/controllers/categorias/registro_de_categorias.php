@@ -24,7 +24,7 @@ if($sentencia->execute()){
    // header('Location: '.$URL.'/categorias/');
     ?>
     <script>
-        location.href = "<?php echo $URL;?>/categorias";
+        location.href = "<?php echo $URL;?>/app/controllers/categorias";
     </script>
     <?php
 }else{
@@ -34,7 +34,7 @@ if($sentencia->execute()){
   //  header('Location: '.$URL.'/categorias');
     ?>
     <script>
-        location.href = "<?php echo $URL;?>/categorias";
+        location.href = "<?php echo $URL;?>/app/controllers/categorias";
     </script>
     <?php
 }
